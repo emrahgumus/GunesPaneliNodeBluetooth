@@ -4,7 +4,7 @@ var async = require('async');
 
 var SensorTag = require('./index');
 
-var socket = require('socket.io-client')('http://192.168.0.119:4000');
+var socket = require('socket.io-client')('http://localhost:4000');
 
 var USE_READ = true;
 
@@ -96,7 +96,6 @@ SensorTag.discover(function(sensorTag) {
           	    var veriler = {panelId: '583fe76c9496e36605f923b9',
                                 akim: objectTemperature.toFixed(1),
                                 gerilim: '15',
-                                light: '15',
                                 sicaklik: '15',
                                 nem: '15'
                               };

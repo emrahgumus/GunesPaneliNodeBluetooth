@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "async": "~0.2.7",
-    "jshint": "~1.1.0"
+    "jshint": "~1.1.0",
+    "ip":"~1.1.4",
+    "socket.io-client": "~1.7.2"
   }
 }

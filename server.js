@@ -1,13 +1,27 @@
-var socket = require('socket.io-client')('https://yapbenzet.com:4000');
+var socket = require('socket.io-client')('http://localhost:4000');
+var ip = require("ip");
+
 
 var d_akim = 17;
 var d_geri = 17;
 var d_sica = 17;
 var d_nem  = 17;
-var d_ligh = 17;
+
+
+function ipAddrUpdate(){
+
+  var ip_address = ip.address();
+
+  socket.compress(false).emit('ipAdresiGuncelle', {
+    macAddr : "40:50:60",
+    ipAddr  : ip_address
+  });
+
+  console.log("ip adresleri guncellendi.");
+}
+
 
 function rand(sayi){
-
   if(sayi > 100) return 100;
   if(sayi < -100) return -100;
 
@@ -15,9 +29,6 @@ function rand(sayi){
     return sayi + (Math.floor((Math.random() * 10))%2);
   }else
     return sayi - (Math.floor((Math.random() * 10))%2);
-
-
-  //return Math.floor((Math.random() * 100) + 1);
 }
 
 var timer = '';
@@ -26,33 +37,39 @@ socket.on('connect', function(){
 
   console.log("sunucuya baglandi");
 
-  timer = setInterval(function(){
+  ipAddrUpdate();
 
+
+  timer = setInterval(function(){
     var veriler = {
-      panelId: '588766cb9398c243182ff337',
-      akim: d_akim = rand(d_akim),
-      gerilim: d_geri = rand(d_geri),
-      light: d_ligh = rand(d_ligh),
+      macAddr:  '40:50:60',
+      akim:     d_akim = rand(d_akim),
+      gerilim:  d_geri = rand(d_geri),
       sicaklik: d_sica = rand(d_sica),
-      nem: d_nem = rand(d_nem)
+      nem:      d_nem = rand(d_nem),
+      secKey:   d_akim+''+d_geri+''+d_sica+''+d_nem,
      };
     socket.compress(false).emit('verileriKaydetDagit', veriler);
 
-    var veriler = {panelId: '584916dfcae05eaf031cda5e', akim: d_akim = rand(d_akim), gerilim: d_geri = rand(d_geri), light: d_ligh = rand(d_ligh), sicaklik: d_sica = rand(d_sica), nem: d_nem = rand(d_nem)};
-    socket.compress(false).emit('verileriKaydetDagit', veriler);
-    console.log("gonderdi");
 
+
+
+
+
+    console.log("gonderdi");
   },600);
+
+
 });
 
+/*
 socket.on('event', function(data){
-
     console.log("event");
 });
+*/
 
 socket.on('disconnect', function(){
 
   clearInterval(timer);
-
   console.log("baglanti koptu");
 });
