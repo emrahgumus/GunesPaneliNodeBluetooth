@@ -4,7 +4,7 @@ var async = require('async');
 
 var SensorTag = require('./index');
 
-var socket = require('socket.io-client')('http://localhost:4000');
+var socket = require('socket.io-client')('http://30.10.21.29:4000');
 
 var USE_READ = true;
 
