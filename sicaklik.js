@@ -93,15 +93,25 @@ SensorTag.discover(function(sensorTag) {
                 console.log('\tambient temperature = %d °C', ambientTemperature.toFixed(1));
 
 
+                var myJSONObject = {panel: data, akim: '10', gerilim:'15', sicaklik: objectTemperature.toFixed(1), nem: '40'};
+                request({
+                    url: "http://www.emrahgumus.com/GunesPaneli/veri_kaydet.php",
+                    method: "POST",
+                    json: true,
+                    body: myJSONObject
+                }, function (error, response, body){
+                        console.log(body);
+                });
+/*
           	    var veriler = {panelId: '583fe76c9496e36605f923b9',
                                 akim: objectTemperature.toFixed(1),
                                 gerilim: '15',
                                 sicaklik: '15',
                                 nem: '15'
                               };
-                              
-          	    socket.compress(false).emit('verileriKaydetDagit', veriler);
 
+          	    socket.compress(false).emit('verileriKaydetDagit', veriler);
+*/
 
                 callback();
               });
