@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://localhost:4000');
+var socket = require('socket.io-client')('http://30.10.21.29:4000');
 var ip = require("ip");
 
 
@@ -6,7 +6,7 @@ var d_akim = 17.0;
 var d_geri = 17.0;
 var d_sica = 17.0;
 var d_nem  = 17.0;
-var macAddress = "40:30:22:33:20";
+var macAddress = "10:20:30";
 
 
 function ipAddrUpdate(){
