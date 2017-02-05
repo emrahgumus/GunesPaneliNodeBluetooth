@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://30.10.21.29:4000');
+var socket = require('socket.io-client')('http://194.27.227.20:4000');//30.10.21.29
 var ip = require("ip");
 
 
